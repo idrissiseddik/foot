@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site en Construction</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 800px;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            margin: auto;
+        }
+        
+        h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        p {
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        
+        .construction-icon {
+            font-size: clamp(3rem, 10vw, 5rem);
+            margin-bottom: 30px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        .contact {
+            margin-top: 30px;
+            font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+        }
+        
+        .contact-links {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .contact-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.2);
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            text-decoration: none;
+            color: white;
+            transition: all 0.3s;
+        }
+        
+        .contact-btn i {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+        
+        .contact-btn span {
+            font-size: 0.7rem;
+        }
+        
+        .contact-btn:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .whatsapp { background: rgba(37, 211, 102, 0.3) !important; }
+        .whatsapp:hover { background: rgba(37, 211, 102, 0.5) !important; }
+        
+        .sms { background: rgba(0, 150, 255, 0.3) !important; }
+        .sms:hover { background: rgba(0, 150, 255, 0.5) !important; }
+        
+        .call { background: rgba(76, 217, 100, 0.3) !important; }
+        .call:hover { background: rgba(76, 217, 100, 0.5) !important; }
+        
+        .phone-number {
+            margin-top: 20px;
+            font-size: clamp(1rem, 3vw, 1.3rem);
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 20px;
+            border-radius: 10px;
+            display: inline-block;
+        }
+        
+        /* Styles pour le carousel de sites amis */
+        .partners-section {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            width: 100%;
+        }
+        
+        .partners-title {
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+        
+        .carousel-container {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            height: 60px;
+        }
+        
+        .carousel-track {
+            display: flex;
+            animation: carousel-scroll 30s linear infinite;
+            width: max-content;
+        }
+        
+        .partner-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 12px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: white;
+            font-weight: 500;
+            min-width: 180px;
+            margin: 0 10px;
+            height: 50px;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+        
+        /* Couleurs différentes pour chaque site */
+        .partner-link:nth-child(5n+1) { 
+            background: linear-gradient(45deg, rgba(52, 152, 219, 0.3), rgba(155, 89, 182, 0.3));
+        }
+        .partner-link:nth-child(5n+2) { 
+            background: linear-gradient(45deg, rgba(46, 204, 113, 0.3), rgba(52, 152, 219, 0.3));
+        }
+        .partner-link:nth-child(5n+3) { 
+            background: linear-gradient(45deg, rgba(241, 196, 15, 0.3), rgba(230, 126, 34, 0.3));
+        }
+        .partner-link:nth-child(5n+4) { 
+            background: linear-gradient(45deg, rgba(231, 76, 60, 0.3), rgba(192, 57, 43, 0.3));
+        }
+        .partner-link:nth-child(5n+5) { 
+            background: linear-gradient(45deg, rgba(155, 89, 182, 0.3), rgba(142, 68, 173, 0.3));
+        }
+        
+        .partner-link:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        @keyframes carousel-scroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+        
+        .carousel-container:hover .carousel-track {
+            animation-play-state: paused;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px 15px;
+            }
+            
+            .contact-links {
+                gap: 10px;
+            }
+            
+            .contact-btn {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .contact-btn i {
+                font-size: 1.3rem;
+            }
+            
+            .partner-link {
+                min-width: 150px;
+                padding: 10px 15px;
+                font-size: 0.9rem;
+                margin: 0 5px;
+            }
+            
+            .carousel-container {
+                height: 50px;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .partner-link {
+                min-width: 130px;
+                font-size: 0.8rem;
+                padding: 8px 12px;
+            }
+            
+            .contact-btn {
+                width: 55px;
+                height: 55px;
+            }
+            
+            .contact-btn i {
+                font-size: 1.2rem;
+            }
+            
+            .contact-btn span {
+                font-size: 0.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="construction-icon">🚧</div>
+        <h1>Site en Construction</h1>
+        <p>Nous travaillons dur pour vous préparer quelque chose d'exceptionnel. Revenez bientôt!</p>
+        
+        <div class="contact">
+            <p>Pour toute question, contactez-nous:</p>
+            <div class="phone-number">+212 608-975435</div>
+        </div>
+        
+        <div class="contact-links">
+            <a href="https://wa.me/212608975435" class="contact-btn whatsapp" aria-label="WhatsApp">
+                <i class="fab fa-whatsapp"></i>
+                <span>WhatsApp</span>
+            </a>
+            
+            <a href="sms:+212608975435" class="contact-btn sms" aria-label="SMS">
+                <i class="fas fa-sms"></i>
+                <span>SMS</span>
+            </a>
+            
+            <a href="tel:+212608975435" class="contact-btn call" aria-label="Appel">
+                <i class="fas fa-phone"></i>
+                <span>Appel</span>
+            </a>
+        </div>
+        
+        <!-- Section des sites amis avec carousel -->
+        <div class="partners-section">
+            <h2 class="partners-title">Nos sites amis</h2>
+            <div class="carousel-container">
+                <div class="carousel-track">
+                    <a href="https://radiocoran.vercel.app" class="partner-link" target="_blank">Radio Coran</a>
+                    <a href="https://lemarket.vercel.app" class="partner-link" target="_blank">Marketplace</a>
+                    <a href="https://kidschannel.vercel.app" class="partner-link" target="_blank">Kids Channel</a>
+                    <a href="https://humour.vercel.app" class="partner-link" target="_blank">TV Humour</a>
+                    <a href="https://radiosmaroc.vercel.app" class="partner-link" target="_blank">Radios Maroc</a>
+                    
+                    <!-- Répétition pour l'effet de boucle continu -->
+                    <a href="https://radiocoran.vercel.app" class="partner-link" target="_blank">Radio Coran</a>
+                    <a href="https://lemarket.vercel.app" class="partner-link" target="_blank">Marketplace</a>
+                    <a href="https://kidschannel.vercel.app" class="partner-link" target="_blank">Kids Channel</a>
+                    <a href="https://humour.vercel.app" class="partner-link" target="_blank">TV Humour</a>
+                    <a href="https://radiosmaroc.vercel.app" class="partner-link" target="_blank">Radios Maroc</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
