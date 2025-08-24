@@ -554,6 +554,100 @@
       transform: scale(1.2);
     }
     
+    /* Styles pour la notification */
+    .notification {
+      position: fixed;
+      top: 100px;
+      right: 20px;
+      background: linear-gradient(to right, #28a745, #20c997);
+      color: white;
+      padding: 15px 25px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      z-index: 1100;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transform: translateX(150%);
+      transition: transform 0.5s ease;
+    }
+    
+    .notification.show {
+      transform: translateX(0);
+    }
+    
+    .notification-icon {
+      font-size: 1.5rem;
+    }
+    
+    .notification-content {
+      flex: 1;
+    }
+    
+    .notification-title {
+      font-weight: 600;
+      margin-bottom: 3px;
+    }
+    
+    .notification-message {
+      font-size: 0.9rem;
+      margin: 0;
+    }
+    
+    /* Styles pour le filtre simple */
+    .simple-filter {
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      margin-bottom: 20px;
+      border: 2px solid rgba(13, 110, 253, 0.1);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      align-items: end;
+    }
+    
+    .filter-field {
+      flex: 1;
+      min-width: 200px;
+      max-width: 300px;
+    }
+    
+    .filter-btn {
+      background: linear-gradient(to right, var(--primary-color), #0a58ca);
+      border: none;
+      border-radius: 30px;
+      padding: 10px 25px;
+      font-weight: 600;
+      color: white;
+      transition: all 0.3s ease;
+      border: 1px solid #0a58ca;
+      height: 45px;
+    }
+    
+    .filter-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(13, 110, 253, 0.4);
+      background: linear-gradient(to right, #0a58ca, var(--primary-color));
+    }
+    
+    .reset-btn {
+      background: linear-gradient(to right, #6c757d, #5a6268);
+      border: none;
+      border-radius: 30px;
+      padding: 10px 25px;
+      font-weight: 600;
+      color: white;
+      transition: all 0.3s ease;
+      height: 45px;
+    }
+    
+    .reset-btn:hover {
+      background: linear-gradient(to right, #5a6268, #6c757d);
+    }
+    
     @media (max-width: 768px) {
       .card {
         max-width: 100%;
@@ -621,6 +715,21 @@
         height: 50px;
         font-size: 20px;
       }
+      
+      .notification {
+        top: 80px;
+        right: 10px;
+        left: 10px;
+      }
+      
+      .simple-filter {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      
+      .filter-field {
+        max-width: 100%;
+      }
     }
   </style>
 </head>
@@ -634,49 +743,42 @@
     </div>
   </header>
 
-  <!-- Filtres -->
+  <!-- Filtre simple -->
   <div class="container my-4">
-    <div class="filter-container">
-      <div class="filter-row">
-        <div class="filter-group">
-          <label for="filterChampionship" class="form-label">Filtrer par championnat :</label>
-          <select id="filterChampionship" class="form-select" onchange="filterMatches()">
-            <option value="">Tous les championnats</option>
-            <option value="Ligue 1">Ligue 1</option>
-            <option value="Liga">Liga</option>
-            <option value="Premier League">Premier League</option>
-            <option value="Serie A">Serie A</option>
-            <option value="Bundesliga">Bundesliga</option>
-          </select>
-        </div>
+    <div class="simple-filter">
+      <div class="filter-field">
+        <label for="filterChampionship" class="form-label">Championnat :</label>
+        <select id="filterChampionship" class="form-select">
+          <option value="">Tous les championnats</option>
+          <option value="Ligue 1">Ligue 1</option>
+          <option value="Liga">Liga</option>
+          <option value="Premier League">Premier League</option>
+          <option value="Serie A">Serie A</option>
+          <option value="Bundesliga">Bundesliga</option>
+        </select>
+      </div>
+      
+      <div class="filter-field">
+        <label for="filterDate" class="form-label">Date :</label>
+        <input type="date" id="filterDate" class="form-control">
+      </div>
+      
+      <div class="filter-field">
+        <button class="filter-btn w-100" onclick="applyFilters()">
+          <i class="fas fa-filter me-2"></i>Filtrer
+        </button>
+      </div>
+      
+      <div class="filter-field">
+        <button class="reset-btn w-100" onclick="resetFilters()">
+          <i class="fas fa-times me-2"></i>Réinitialiser
+        </button>
       </div>
     </div>
   </div>
 
   <!-- Cards -->
   <div class="container" id="matchesContainer">
-    <div class="card" data-date="2025-08-24" data-championship="Serie A">
-      <div class="card-body">
-        <div class="match-championship">Serie A</div>
-        <div class="match-teams">
-          <div class="team-container">
-            <div class="team-name">Como</div>
-            <div class="team-result">2</div>
-          </div>
-          <div class="vs-badge">VS</div>
-          <div class="team-container">
-            <div class="team-name">Lazio</div>
-            <div class="team-result">0</div>
-          </div>
-        </div>
-        <div class="match-date">24 Août 2025</div>
-        <button class="btn btn-primary" onclick="openSummary('https://youtu.be/LKHpwK9TRxc')">
-          <i class="fas fa-play-circle me-2"></i>Voir le résumé
-        </button>
-      </div>
-    </div>
-
-
     <div class="card" data-date="2025-08-24" data-championship="Bundesliga">
       <div class="card-body">
         <div class="match-championship">Bundesliga</div>
@@ -740,7 +842,6 @@
       </div>
     </div>
 
-
     <div class="card" data-date="2025-08-23" data-championship="Bundesliga">
       <div class="card-body">
         <div class="match-championship">Bundesliga</div>
@@ -761,7 +862,6 @@
         </button>
       </div>
     </div>
-
 
     <div class="card" data-date="2025-08-23" data-championship="Serie A">
       <div class="card-body">
@@ -1078,6 +1178,17 @@
       </div>
   </div>
 
+  <!-- Notification -->
+  <div class="notification" id="notification">
+    <div class="notification-icon">
+      <i class="fas fa-check-circle"></i>
+    </div>
+    <div class="notification-content">
+      <div class="notification-title">Filtrage réussi</div>
+      <p class="notification-message" id="notificationMessage">Les matchs ont été filtrés selon vos critères.</p>
+    </div>
+  </div>
+
   <!-- Bouton coeur flottant -->
   <div class="floating-heart" data-bs-toggle="modal" data-bs-target="#sitesAmisModal">
     <i class="fas fa-heart"></i>
@@ -1169,7 +1280,7 @@
     </div>
   </div>
 
-  <!-- Modal -->
+  <!-- Modal Résumé -->
   <div class="modal fade" id="summaryModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
       <div class="modal-content">
@@ -1282,6 +1393,7 @@
   <script>
     const modal = new bootstrap.Modal(document.getElementById('summaryModal'));
     const sitesAmisModal = new bootstrap.Modal(document.getElementById('sitesAmisModal'));
+    const notification = document.getElementById('notification');
     let player;
     let currentVideoId = '';
     const sitesAmisFullscreen = document.getElementById('sitesAmisFullscreen');
@@ -1393,18 +1505,85 @@
       hideSitesAmisFullscreen();
     });
 
-    // Filtrer les matchs par championnat uniquement
-    function filterMatches() {
+    // Afficher une notification
+    function showNotification(message) {
+      const notificationMessage = document.getElementById('notificationMessage');
+      notificationMessage.textContent = message;
+      notification.classList.add('show');
+      
+      setTimeout(() => {
+        notification.classList.remove('show');
+      }, 9000);
+    }
+
+    // Appliquer les filtres
+    function applyFilters() {
       const selectedChampionship = document.getElementById('filterChampionship').value;
+      const selectedDate = document.getElementById('filterDate').value;
+      
+      let visibleCount = 0;
+      let message = "Filtrage appliqué - ";
       
       document.querySelectorAll('#matchesContainer .card').forEach(card => {
         const cardChampionship = card.getAttribute('data-championship');
+        const cardDate = card.getAttribute('data-date');
         
-        const championshipMatch = !selectedChampionship || cardChampionship === selectedChampionship;
+        // Vérifier le championnat
+        const championshipMatch = !selectedChampionship || selectedChampionship === '' || cardChampionship === selectedChampionship;
         
-        card.style.display = championshipMatch ? 'block' : 'none';
+        // Vérifier la date
+        const dateMatch = !selectedDate || selectedDate === '' || cardDate === selectedDate;
+        
+        // Afficher ou masquer la carte en fonction des filtres
+        const shouldShow = championshipMatch && dateMatch;
+        card.style.display = shouldShow ? 'block' : 'none';
+        
+        if (shouldShow) visibleCount++;
       });
+      
+      // Personnaliser le message de notification
+      if (selectedChampionship && selectedDate) {
+        message += `${visibleCount} match(s) trouvé(s) pour ${selectedChampionship} le ${formatDate(selectedDate)}`;
+      } else if (selectedChampionship) {
+        message += `${visibleCount} match(s) trouvé(s) pour ${selectedChampionship}`;
+      } else if (selectedDate) {
+        message += `${visibleCount} match(s) trouvé(s) pour le ${formatDate(selectedDate)}`;
+      } else {
+        message += `${visibleCount} match(s) affiché(s) (aucun filtre appliqué)`;
+      }
+      
+      showNotification(message);
     }
+
+    // Réinitialiser les filtres
+    function resetFilters() {
+      document.getElementById('filterChampionship').value = '';
+      document.getElementById('filterDate').value = '';
+      
+      // Afficher toutes les cartes
+      document.querySelectorAll('#matchesContainer .card').forEach(card => {
+        card.style.display = 'block';
+      });
+      
+      // Afficher une notification
+      showNotification("Tous les filtres ont été réinitialisés - Affichage de tous les matchs");
+    }
+
+    // Formater une date au format JJ/MM/AAAA
+    function formatDate(dateString) {
+      if (!dateString) return '';
+      
+      const date = new Date(dateString);
+      const day = date.getDate().toString().padStart(2, '0');
+      const month = (date.getMonth() + 1).toString().padStart(2, '0');
+      const year = date.getFullYear();
+      
+      return `${day}/${month}/${year}`;
+    }
+
+    // Appliquer le filtrage automatique lors du changement de sélection
+    document.getElementById('filterChampionship').addEventListener('change', applyFilters);
+    document.getElementById('filterDate').addEventListener('change', applyFilters);
   </script>
 </body>
 </html>
