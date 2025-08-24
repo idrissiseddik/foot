@@ -1,303 +1,1057 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Site en Construction</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-            color: white;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 20px;
-        }
-        
-        .container {
-            width: 100%;
-            max-width: 800px;
-            background-color: rgba(255, 255, 255, 0.1);
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(10px);
-            margin: auto;
-        }
-        
-        h1 {
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-        
-        p {
-            font-size: clamp(1rem, 3vw, 1.5rem);
-            margin-bottom: 30px;
-            line-height: 1.6;
-        }
-        
-        .construction-icon {
-            font-size: clamp(3rem, 10vw, 5rem);
-            margin-bottom: 30px;
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-        
-        .contact {
-            margin-top: 30px;
-            font-size: clamp(0.9rem, 2.5vw, 1.2rem);
-        }
-        
-        .contact-links {
-            margin-top: 30px;
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-        
-        .contact-btn {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background: rgba(255, 255, 255, 0.2);
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            text-decoration: none;
-            color: white;
-            transition: all 0.3s;
-        }
-        
-        .contact-btn i {
-            font-size: 1.5rem;
-            margin-bottom: 5px;
-        }
-        
-        .contact-btn span {
-            font-size: 0.7rem;
-        }
-        
-        .contact-btn:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.3);
-        }
-        
-        .whatsapp { background: rgba(37, 211, 102, 0.3) !important; }
-        .whatsapp:hover { background: rgba(37, 211, 102, 0.5) !important; }
-        
-        .sms { background: rgba(0, 150, 255, 0.3) !important; }
-        .sms:hover { background: rgba(0, 150, 255, 0.5) !important; }
-        
-        .call { background: rgba(76, 217, 100, 0.3) !important; }
-        .call:hover { background: rgba(76, 217, 100, 0.5) !important; }
-        
-        .phone-number {
-            margin-top: 20px;
-            font-size: clamp(1rem, 3vw, 1.3rem);
-            background: rgba(255, 255, 255, 0.1);
-            padding: 10px 20px;
-            border-radius: 10px;
-            display: inline-block;
-        }
-        
-        /* Styles pour le carousel de sites amis */
-        .partners-section {
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
-            width: 100%;
-        }
-        
-        .partners-title {
-            font-size: clamp(1.2rem, 3vw, 1.5rem);
-            margin-bottom: 20px;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
-        }
-        
-        .carousel-container {
-            width: 100%;
-            overflow: hidden;
-            position: relative;
-            height: 60px;
-        }
-        
-        .carousel-track {
-            display: flex;
-            animation: carousel-scroll 30s linear infinite;
-            width: max-content;
-        }
-        
-        .partner-link {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(255, 255, 255, 0.15);
-            padding: 12px 20px;
-            border-radius: 8px;
-            text-decoration: none;
-            color: white;
-            font-weight: 500;
-            min-width: 180px;
-            margin: 0 10px;
-            height: 50px;
-            transition: all 0.3s ease;
-            flex-shrink: 0;
-        }
-        
-        /* Couleurs différentes pour chaque site */
-        .partner-link:nth-child(5n+1) { 
-            background: linear-gradient(45deg, rgba(52, 152, 219, 0.3), rgba(155, 89, 182, 0.3));
-        }
-        .partner-link:nth-child(5n+2) { 
-            background: linear-gradient(45deg, rgba(46, 204, 113, 0.3), rgba(52, 152, 219, 0.3));
-        }
-        .partner-link:nth-child(5n+3) { 
-            background: linear-gradient(45deg, rgba(241, 196, 15, 0.3), rgba(230, 126, 34, 0.3));
-        }
-        .partner-link:nth-child(5n+4) { 
-            background: linear-gradient(45deg, rgba(231, 76, 60, 0.3), rgba(192, 57, 43, 0.3));
-        }
-        .partner-link:nth-child(5n+5) { 
-            background: linear-gradient(45deg, rgba(155, 89, 182, 0.3), rgba(142, 68, 173, 0.3));
-        }
-        
-        .partner-link:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
-        }
-        
-        @keyframes carousel-scroll {
-            0% {
-                transform: translateX(0);
-            }
-            100% {
-                transform: translateX(-50%);
-            }
-        }
-        
-        .carousel-container:hover .carousel-track {
-            animation-play-state: paused;
-        }
-        
-        @media (max-width: 600px) {
-            .container {
-                padding: 20px 15px;
-            }
-            
-            .contact-links {
-                gap: 10px;
-            }
-            
-            .contact-btn {
-                width: 60px;
-                height: 60px;
-            }
-            
-            .contact-btn i {
-                font-size: 1.3rem;
-            }
-            
-            .partner-link {
-                min-width: 150px;
-                padding: 10px 15px;
-                font-size: 0.9rem;
-                margin: 0 5px;
-            }
-            
-            .carousel-container {
-                height: 50px;
-            }
-        }
-        
-        @media (max-width: 400px) {
-            .partner-link {
-                min-width: 130px;
-                font-size: 0.8rem;
-                padding: 8px 12px;
-            }
-            
-            .contact-btn {
-                width: 55px;
-                height: 55px;
-            }
-            
-            .contact-btn i {
-                font-size: 1.2rem;
-            }
-            
-            .contact-btn span {
-                font-size: 0.6rem;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Foot24 - Résumés des matchs de football</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #0d6efd;
+      --secondary-color: #6c757d;
+      --accent-color: #ffcc00;
+      --dark-color: #343a40;
+      --light-color: #f8f9fa;
+    }
+    
+    body {
+      padding-top: 80px;
+      padding-bottom: 80px;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      text-align: center;
+      font-family: 'Montserrat', sans-serif;
+    }
+    
+    header, footer {
+      background: linear-gradient(to right, var(--dark-color), #2c3e50);
+      color: white;
+      position: fixed;
+      width: 100%;
+      z-index: 1000;
+      left: 0;
+      box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+    }
+    
+    header { 
+      top: 0;
+      padding: 15px 0;
+    }
+    
+    footer { 
+      bottom: 0;
+      padding: 15px 0;
+    }
+    
+    .header-title {
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin: 0;
+      font-size: 1.8rem;
+      background: linear-gradient(45deg, var(--accent-color), #ff8c00);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .card {
+      margin: 20px auto;
+      max-width: 420px;
+      border: 3px solid var(--primary-color);
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      background: white;
+      overflow: hidden;
+    }
+    
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+      border: 3px solid #0a58ca;
+    }
+    
+    .card-body {
+      padding: 20px;
+    }
+    
+    .match-teams {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+      position: relative;
+    }
+    
+    .vs-badge {
+      background: var(--primary-color);
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      box-shadow: 0 4px 8px rgba(13, 110, 253, 0.3);
+      border: 2px solid white;
+    }
+    
+    .team-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .team-name {
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--dark-color);
+      font-size: 1.1rem;
+    }
+    
+    .team-result {
+      font-size: 1.4rem;
+      font-weight: bold;
+      background: var(--primary-color);
+      color: white;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      margin: 0 auto;
+      border: 2px solid #e9ecef;
+    }
+    
+    .match-date {
+      font-size: 0.9rem;
+      color: var(--secondary-color);
+      margin: 15px 0;
+      padding: 8px 15px;
+      background: rgba(13, 110, 253, 0.1);
+      border-radius: 20px;
+      display: inline-block;
+      border: 1px solid rgba(13, 110, 253, 0.2);
+    }
+    
+    .btn-primary {
+      background: linear-gradient(to right, var(--primary-color), #0a58ca);
+      border: none;
+      border-radius: 30px;
+      padding: 10px 25px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      box-shadow: 0 4px 8px rgba(13, 110, 253, 0.3);
+      transition: all 0.3s ease;
+      border: 1px solid #0a58ca;
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(13, 110, 253, 0.4);
+      background: linear-gradient(to right, #0a58ca, var(--primary-color));
+      border: 1px solid #0a58ca;
+    }
+    
+    .modal-footer-ad {
+      position: absolute;
+      bottom: 20px;
+      left: 10px;
+      width: calc(100% - 20px);
+      background: rgba(0, 0, 0, 0.85);
+      color: #fff;
+      padding: 8px;
+      text-align: center;
+      height: 65px;
+      z-index: 1001;
+      border-radius: 10px;
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .ad-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .ad-title {
+      font-size: 0.9rem;
+      margin-bottom: 3px;
+      color: var(--accent-color);
+      font-weight: bold;
+    }
+    
+    .ad-text {
+      font-size: 0.85rem;
+      margin: 0 0 5px 0;
+      font-weight: bold;
+    }
+    
+    .ad-contact-icons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+    
+    .ad-icon {
+      color: white;
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+      border-radius: 50%;
+      padding: 5px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .ad-icon:hover {
+      transform: scale(1.3);
+      background: rgba(255, 255, 255, 0.2);
+    }
+    
+    .whatsapp { color: #25D366; }
+    .sms { color: #00B2FF; }
+    .phone { color: #34B7F1; }
+    
+    #player {
+      width: 100%;
+      height: 100%;
+      min-height: 400px;
+      border-radius: 10px;
+      border: 2px solid rgba(0, 0, 0, 0.1);
+    }
+    
+    .video-container {
+      position: relative;
+      height: 70vh;
+      min-height: 400px;
+    }
+    
+    .modal-content {
+      border-radius: 15px;
+      overflow: hidden;
+      border: 2px solid var(--primary-color);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+      height: 80vh;
+      max-height: 800px;
+    }
+    
+    .modal-body {
+      padding: 0;
+      height: calc(100% - 70px);
+    }
+    
+    .modal-header {
+      background: linear-gradient(to right, var(--dark-color), #2c3e50);
+      color: white;
+      border: none;
+      padding: 15px 20px;
+      border-bottom: 2px solid var(--accent-color);
+    }
+    
+    .modal-title {
+      font-weight: 600;
+    }
+    
+    .btn-close {
+      filter: invert(1);
+    }
+    
+    .container {
+      max-width: 1200px;
+    }
+    
+    .form-label {
+      font-weight: 600;
+      color: var(--dark-color);
+      margin-bottom: 10px;
+    }
+    
+    .form-control {
+      border-radius: 30px;
+      padding: 10px 20px;
+      border: 2px solid #e9ecef;
+      transition: all 0.3s ease;
+    }
+    
+    .form-control:focus {
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    }
+    
+    .filter-container {
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      margin-bottom: 20px;
+      border: 2px solid rgba(13, 110, 253, 0.1);
+    }
+    
+    /* Styles pour le carrousel des sites amis en plein écran */
+    .sites-amis-fullscreen {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+      z-index: 1002;
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    
+    .sites-amis-title {
+      font-weight: 700;
+      color: white;
+      margin-bottom: 30px;
+      font-size: 2.2rem;
+      text-align: center;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+    
+    .carousel-container {
+      display: flex;
+      width: 100%;
+      max-width: 1000px;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .carousel-track {
+      display: flex;
+      animation: scroll 30s linear infinite;
+      width: max-content;
+    }
+    
+    .site-ami-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 15px;
+      padding: 25px;
+      margin: 0 15px;
+      min-width: 280px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+    }
+    
+    .site-ami-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+    }
+    
+    .site-ami-icon {
+      font-size: 3rem;
+      margin-bottom: 15px;
+      color: var(--primary-color);
+    }
+    
+    .site-ami-name {
+      font-weight: 700;
+      font-size: 1.4rem;
+      margin-bottom: 15px;
+      color: var(--dark-color);
+      text-align: center;
+    }
+    
+    .site-ami-link {
+      background: linear-gradient(to right, var(--primary-color), #0a58ca);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      display: inline-block;
+    }
+    
+    .site-ami-link:hover {
+      background: linear-gradient(to right, #0a58ca, var(--primary-color));
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      color: white;
+    }
+    
+    .carousel-pause:hover .carousel-track {
+      animation-play-state: paused;
+    }
+    
+    @keyframes scroll {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+    
+    .replay-btn {
+      position: absolute;
+      bottom: 90px;
+      right: 20px;
+      background: var(--accent-color);
+      color: var(--dark-color);
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      z-index: 1003;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .replay-btn:hover {
+      background: #ffd700;
+      transform: scale(1.1);
+    }
+    
+    @media (max-width: 768px) {
+      .card {
+        max-width: 100%;
+      }
+      
+      .header-title {
+        font-size: 1.5rem;
+      }
+      
+      .team-name {
+        font-size: 1rem;
+      }
+      
+      .modal-content {
+        height: 70vh;
+        max-height: none;
+      }
+      
+      .video-container {
+        height: 60vh;
+        min-height: 300px;
+      }
+      
+      .sites-amis-title {
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+      }
+      
+      .site-ami-item {
+        min-width: 250px;
+        padding: 20px;
+        margin: 0 10px;
+      }
+      
+      .site-ami-icon {
+        font-size: 2.5rem;
+      }
+      
+      .site-ami-name {
+        font-size: 1.2rem;
+      }
+      
+      .replay-btn {
+        bottom: 80px;
+        right: 10px;
+        width: 45px;
+        height: 45px;
+        font-size: 1.3rem;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div class="construction-icon">🚧</div>
-        <h1>Site en Construction</h1>
-        <p>Nous travaillons dur pour vous préparer quelque chose d'exceptionnel. Revenez bientôt!</p>
-        
-        <div class="contact">
-            <p>Pour toute question, contactez-nous:</p>
-            <div class="phone-number">+212 608-975435</div>
-        </div>
-        
-        <div class="contact-links">
-            <a href="https://wa.me/212608975435" class="contact-btn whatsapp" aria-label="WhatsApp">
-                <i class="fab fa-whatsapp"></i>
-                <span>WhatsApp</span>
-            </a>
-            
-            <a href="sms:+212608975435" class="contact-btn sms" aria-label="SMS">
-                <i class="fas fa-sms"></i>
-                <span>SMS</span>
-            </a>
-            
-            <a href="tel:+212608975435" class="contact-btn call" aria-label="Appel">
-                <i class="fas fa-phone"></i>
-                <span>Appel</span>
-            </a>
-        </div>
-        
-        <!-- Section des sites amis avec carousel -->
-        <div class="partners-section">
-            <h2 class="partners-title">Nos sites amis</h2>
-            <div class="carousel-container">
-                <div class="carousel-track">
-                    <a href="https://radiocoran.vercel.app" class="partner-link" target="_blank">Radio Coran</a>
-                    <a href="https://lemarket.vercel.app" class="partner-link" target="_blank">Marketplace</a>
-                    <a href="https://kidschannel.vercel.app" class="partner-link" target="_blank">Kids Channel</a>
-                    <a href="https://humour.vercel.app" class="partner-link" target="_blank">TV Humour</a>
-                    <a href="https://radiosmaroc.vercel.app" class="partner-link" target="_blank">Radios Maroc</a>
-                    
-                    <!-- Répétition pour l'effet de boucle continu -->
-                    <a href="https://radiocoran.vercel.app" class="partner-link" target="_blank">Radio Coran</a>
-                    <a href="https://lemarket.vercel.app" class="partner-link" target="_blank">Marketplace</a>
-                    <a href="https://kidschannel.vercel.app" class="partner-link" target="_blank">Kids Channel</a>
-                    <a href="https://humour.vercel.app" class="partner-link" target="_blank">TV Humour</a>
-                    <a href="https://radiosmaroc.vercel.app" class="partner-link" target="_blank">Radios Maroc</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</body>
 
+  <!-- Header -->
+  <header class="py-2">
+    <div class="container">
+      <h1 class="header-title">FooT24</h1>
+      <p class="mb-0">Résumés des matchs de football</p>
+    </div>
+  </header>
+
+  <!-- Filtre par date -->
+  <div class="container my-4">
+    <div class="filter-container">
+      <label for="filterDate" class="form-label">Filtrer par date :</label>
+      <input type="date" id="filterDate" class="form-control w-50 mx-auto" onchange="filterByDate()">
+    </div>
+  </div>
+
+
+
+  <!-- Cards -->
+  <div class="container" id="matchesContainer">
+    <div class="card" data-date="2025-08-23">
+      <div class="card-body">
+        <div class="match-teams">
+          <div class="team-container">
+            <div class="team-name">Genoa</div>
+            <div class="team-result">0</div>
+          </div>
+          <div class="vs-badge">VS</div>
+          <div class="team-container">
+            <div class="team-name">Lecce</div>
+            <div class="team-result">0</div>
+          </div>
+        </div>
+        <div class="match-date">23 Août 2025</div>
+        <button class="btn btn-primary" onclick="openSummary('https://youtu.be/sgKqKEtzv1o')">
+          <i class="fas fa-play-circle me-2"></i>Voir le résumé
+        </button>
+      </div>
+    </div>
+
+    <div class="card" data-date="2025-08-23">
+      <div class="card-body">
+        <div class="match-teams">
+          <div class="team-container">
+            <div class="team-name">Sassuolo</div>
+            <div class="team-result">0</div>
+          </div>
+          <div class="vs-badge">VS</div>
+          <div class="team-container">
+            <div class="team-name">Naples</div>
+            <div class="team-result">2</div>
+          </div>
+        </div>
+        <div class="match-date">23 Août 2025</div>
+        <button class="btn btn-primary" onclick="openSummary('https://youtu.be/wXNrPVMNK9Q')">
+          <i class="fas fa-play-circle me-2"></i>Voir le résumé
+        </button>
+      </div>
+    </div>
+
+    <div class="card" data-date="2025-08-23">
+      <div class="card-body">
+        <div class="match-teams">
+          <div class="team-container">
+            <div class="team-name">Rome</div>
+            <div class="team-result">1</div>
+          </div>
+          <div class="vs-badge">VS</div>
+          <div class="team-container">
+            <div class="team-name">Bologne</div>
+            <div class="team-result">0</div>
+          </div>
+        </div>
+        <div class="match-date">23 Août 2025</div>
+        <button class="btn btn-primary" onclick="openSummary('https://youtu.be/FqHGauGkacs')">
+          <i class="fas fa-play-circle me-2"></i>Voir le résumé
+        </button>
+      </div>
+    </div>
+
+    <div class="card" data-date="2025-08-23">
+      <div class="card-body">
+        <div class="match-teams">
+          <div class="team-container">
+            <div class="team-name">Milan</div>
+            <div class="team-result">1</div>
+          </div>
+          <div class="vs-badge">VS</div>
+          <div class="team-container">
+            <div class="team-name">Cermonese</div>
+            <div class="team-result">2</div>
+          </div>
+        </div>
+        <div class="match-date">23 Août 2025</div>
+        <button class="btn btn-primary" onclick="openSummary('https://youtu.be/m45tN2MWfyc')">
+          <i class="fas fa-play-circle me-2"></i>Voir le résumé
+        </button>
+      </div>
+    </div>
+
+    <div class="card" data-date="2025-08-23">
+      <div class="card-body">
+        <div class="match-teams">
+          <div class="team-container">
+            <div class="team-name">Francfort</div>
+            <div class="team-result">1</div>
+          </div>
+          <div class="vs-badge">VS</div>
+          <div class="team-container">
+            <div class="team-name">Breme</div>
+            <div class="team-result">1</div>
+          </div>
+        </div>
+        <div class="match-date">23 Août 2025</div>
+        <button class="btn btn-primary" onclick="openSummary('https://youtu.be/11xUQTNZ6D0')">
+          <i class="fas fa-play-circle me-2"></i>Voir le résumé
+        </button>
+      </div>
+    </div>
+
+    <div class="card" data-date="2025-08-23">
+      <div class="card-body">
+        <div class="match-teams">
+          <div class="team-container">
+            <div class="team-name">Sankt Pauli</div>
+            <div class="team-result">3</div>
+          </div>
+          <div class="vs-badge">VS</div>
+          <div class="team-container">
+            <div class="team-name">Dortmund</div>
+            <div class="team-result">3</div>
+          </div>
+        </div>
+        <div class="match-date">23 Août 2025</div>
+        <button class="btn btn-primary" onclick="openSummary('https://youtu.be/Fi4IEMXdyqQ')">
+          <i class="fas fa-play-circle me-2"></i>Voir le résumé
+        </button>
+      </div>
+    </div>
+
+    <div class="card" data-date="2025-08-23">
+      <div class="card-body">
+        <div class="match-teams">
+          <div class="team-container">
+            <div class="team-name">Man City</div>
+            <div class="team-result">0</div>
+          </div>
+          <div class="vs-badge">VS</div>
+          <div class="team-container">
+            <div class="team-name">Tottenham</div>
+            <div class="team-result">2</div>
+          </div>
+        </div>
+        <div class="match-date">23 Août 2025</div>
+        <button class="btn btn-primary" onclick="openSummary('https://youtu.be/dM6CiY2Ux1k')">
+          <i class="fas fa-play-circle me-2"></i>Voir le résumé
+        </button>
+      </div>
+    </div>
+
+    <div class="card" data-date="2025-08-23">
+      <div class="card-body">
+        <div class="match-teams">
+          <div class="team-container">
+            <div class="team-name">Brentford</div>
+            <div class="team-result">1</div>
+          </div>
+          <div class="vs-badge">VS</div>
+          <div class="team-container">
+            <div class="team-name">Aston Villa</div>
+            <div class="team-result">0</div>
+          </div>
+        </div>
+        <div class="match-date">23 Août 2025</div>
+        <button class="btn btn-primary" onclick="openSummary('https://youtu.be/g4gZftqzqjA')">
+          <i class="fas fa-play-circle me-2"></i>Voir le résumé
+        </button>
+      </div>
+    </div>
+
+    <div class="card" data-date="2025-08-23">
+      <div class="card-body">
+        <div class="match-teams">
+          <div class="team-container">
+            <div class="team-name">Bournemouth</div>
+            <div class="team-result">1</div>
+          </div>
+          <div class="vs-badge">VS</div>
+          <div class="team-container">
+            <div class="team-name">Wolverhampton</div>
+            <div class="team-result">0</div>
+          </div>
+        </div>
+        <div class="match-date">23 Août 2025</div>
+        <button class="btn btn-primary" onclick="openSummary('https://youtu.be/kXNeMLTX37A')">
+          <i class="fas fa-play-circle me-2"></i>Voir le résumé
+        </button>
+      </div>
+    </div>
+
+    <div class="card" data-date="2025-08-23">
+      <div class="card-body">
+        <div class="match-teams">
+          <div class="team-container">
+            <div class="team-name">Arsenal</div>
+            <div class="team-result">5</div>
+          </div>
+          <div class="vs-badge">VS</div>
+          <div class="team-container">
+            <div class="team-name">Leeds</div>
+            <div class="team-result">0</div>
+          </div>
+        </div>
+        <div class="match-date">23 Août 2025</div>
+        <button class="btn btn-primary" onclick="openSummary('https://youtu.be/aVnsrYfFiEU')">
+          <i class="fas fa-play-circle me-2"></i>Voir le résumé
+        </button>
+      </div>
+    </div>
+
+    <div class="card" data-date="2025-08-23">
+      <div class="card-body">
+        <div class="match-teams">
+          <div class="team-container">
+            <div class="team-name">Majorque</div>
+            <div class="team-result">1</div>
+          </div>
+          <div class="vs-badge">VS</div>
+          <div class="team-container">
+            <div class="team-name">Celta Vigo</div>
+            <div class="team-result">1</div>
+          </div>
+        </div>
+        <div class="match-date">23 Août 2025</div>
+        <button class="btn btn-primary" onclick="openSummary('https://youtu.be/FZoy7fZquDA')">
+          <i class="fas fa-play-circle me-2"></i>Voir le résumé
+        </button>
+      </div>
+    </div>
+
+    <div class="card" data-date="2025-08-23">
+      <div class="card-body">
+        <div class="match-teams">
+          <div class="team-container">
+            <div class="team-name">AT.Madrid</div>
+            <div class="team-result">1</div>
+          </div>
+          <div class="vs-badge">VS</div>
+          <div class="team-container">
+            <div class="team-name">Elche</div>
+            <div class="team-result">1</div>
+          </div>
+        </div>
+        <div class="match-date">23 Août 2025</div>
+        <button class="btn btn-primary" onclick="openSummary('https://youtu.be/on906sZo5GU')">
+          <i class="fas fa-play-circle me-2"></i>Voir le résumé
+        </button>
+      </div>
+    </div>
+
+    <div class="card" data-date="2025-08-23">
+      <div class="card-body">
+        <div class="match-teams">
+          <div class="team-container">
+            <div class="team-name">Levante</div>
+            <div class="team-result">2</div>
+          </div>
+          <div class="vs-badge">VS</div>
+          <div class="team-container">
+            <div class="team-name">FC Barcelone</div>
+            <div class="team-result">3</div>
+          </div>
+        </div>
+        <div class="match-date">23 Août 2025</div>
+        <button class="btn btn-primary" onclick="openSummary('https://youtu.be/OYJVSlsZr9I')">
+          <i class="fas fa-play-circle me-2"></i>Voir le résumé
+        </button>
+      </div>
+    </div>
+
+    <div class="card" data-date="2025-08-22">
+      <div class="card-body">
+        <div class="match-teams">
+          <div class="team-container">
+            <div class="team-name">Betis</div>
+            <div class="team-result">1</div>
+          </div>
+          <div class="vs-badge">VS</div>
+          <div class="team-container">
+            <div class="team-name">Alavés</div>
+            <div class="team-result">0</div>
+          </div>
+        </div>
+        <div class="match-date">22 Août 2025</div>
+        <button class="btn btn-primary" onclick="openSummary('https://youtu.be/spoPqnG5e8Y')">
+          <i class="fas fa-play-circle me-2"></i>Voir le résumé
+        </button>
+      </div>
+    </div>
+
+    <div class="card" data-date="2025-08-22">
+      <div class="card-body">
+        <div class="match-teams">
+          <div class="team-container">
+            <div class="team-name">West Ham</div>
+            <div class="team-result">1</div>
+          </div>
+          <div class="vs-badge">VS</div>
+          <div class="team-container">
+            <div class="team-name">Chelsea</div>
+            <div class="team-result">5</div>
+          </div>
+        </div>
+        <div class="match-date">22 Août 2025</div>
+        <button class="btn btn-primary" onclick="openSummary('https://youtu.be/txuh0cUDGsg')">
+          <i class="fas fa-play-circle me-2"></i>Voir le résumé
+        </button>
+      </div>
+    </div>
+
+    <div class="card" data-date="2025-08-22">
+      <div class="card-body">
+        <div class="match-teams">
+          <div class="team-container">
+            <div class="team-name">B.Munich</div>
+            <div class="team-result">6</div>
+          </div>
+          <div class="vs-badge">VS</div>
+          <div class="team-container">
+            <div class="team-name">Leipzig</div>
+            <div class="team-result">0</div>
+          </div>
+        </div>
+        <div class="match-date">22 Août 2025</div>
+        <button class="btn btn-primary" onclick="openSummary('https://youtu.be/aZ7I4eQ7sYA')">
+          <i class="fas fa-play-circle me-2"></i>Voir le résumé
+        </button>
+      </div>
+    </div>
+
+
+
+
+
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="summaryModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Résumé du match</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+        </div>
+        <div class="modal-body position-relative">
+          <div class="video-container">
+            <div id="player"></div>
+            
+            <!-- Carrousel des sites amis en plein écran -->
+            <div class="sites-amis-fullscreen carousel-pause" id="sitesAmisFullscreen">
+              <h2 class="sites-amis-title">Découvrez nos sites amis</h2>
+              
+              <div class="carousel-container">
+                <div class="carousel-track">
+                  <!-- Site 1 -->
+                  <div class="site-ami-item">
+                    <div class="site-ami-icon">
+                      <i class="fas fa-microphone-alt"></i>
+                    </div>
+                    <h3 class="site-ami-name">Radio Coran</h3>
+                    <a href="https://radiocoran.vercel.app" target="_blank" class="site-ami-link">Visiter le site</a>
+                  </div>
+                  
+                  <!-- Site 2 -->
+                  <div class="site-ami-item">
+                    <div class="site-ami-icon">
+                      <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <h3 class="site-ami-name">Marketplace</h3>
+                    <a href="https://lemarket.vercel.app" target="_blank" class="site-ami-link">Visiter le site</a>
+                  </div>
+                  
+                  <!-- Site 3 -->
+                  <div class="site-ami-item">
+                    <div class="site-ami-icon">
+                      <i class="fas fa-laugh"></i>
+                    </div>
+                    <h3 class="site-ami-name">TV Humour</h3>
+                    <a href="https://humour.vercel.app" target="_blank" class="site-ami-link">Visiter le site</a>
+                  </div>
+                  
+                  <!-- Répéter les sites pour un défilement continu -->
+                  <div class="site-ami-item">
+                    <div class="site-ami-icon">
+                      <i class="fas fa-microphone-alt"></i>
+                    </div>
+                    <h3 class="site-ami-name">Radio Coran</h3>
+                    <a href="https://radiocoran.vercel.app" target="_blank" class="site-ami-link">Visiter le site</a>
+                  </div>
+                  
+                  <div class="site-ami-item">
+                    <div class="site-ami-icon">
+                      <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <h3 class="site-ami-name">Marketplace</h3>
+                    <a href="https://lemarket.vercel.app" target="_blank" class="site-ami-link">Visiter le site</a>
+                  </div>
+                  
+                  <div class="site-ami-item">
+                    <div class="site-ami-icon">
+                      <i class="fas fa-laugh"></i>
+                    </div>
+                    <h3 class="site-ami-name">TV Humour</h3>
+                    <a href="https://humour.vercel.app" target="_blank" class="site-ami-link">Visiter le site</a>
+                  </div>
+                </div>
+              </div>
+              
+              <button class="replay-btn" id="replayVideo">
+                <i class="fas fa-redo"></i>
+              </button>
+            </div>
+            
+            <div class="modal-footer-ad">
+              <div class="ad-content">
+                <div class="ad-title">Espace publicitaire</div>
+                <p class="ad-text">Contactez-nous pour diffuser votre publicité:</p>
+                <div class="ad-contact-icons">
+                  <a href="https://wa.me/212608975435" class="ad-icon whatsapp" target="_blank">
+                    <i class="fab fa-whatsapp"></i>
+                  </a>
+                  <a href="sms:+212608975435" class="ad-icon sms">
+                    <i class="fas fa-sms"></i>
+                  </a>
+                  <a href="tel:+212608975435" class="ad-icon phone">
+                    <i class="fas fa-phone"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="py-2">
+    <div class="container">
+      <p class="mb-0">&copy; 2025 Foot24 - Par : M.Seddik Elidrissi</p>
+    </div>
+  </footer>
+
+  <!-- YouTube IFrame API -->
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const modal = new bootstrap.Modal(document.getElementById('summaryModal'));
+    let player;
+    let currentVideoId = '';
+    const sitesAmisFullscreen = document.getElementById('sitesAmisFullscreen');
+    const replayBtn = document.getElementById('replayVideo');
+
+    // Initialisation du player YouTube
+    function onYouTubeIframeAPIReady() {
+      player = new YT.Player('player', {
+        height: '100%',
+        width: '100%',
+        playerVars: {
+          'playsinline': 1,
+          'modestbranding': 1,
+          'rel': 0,
+          'controls': 1
+        },
+        events: {
+          'onStateChange': onPlayerStateChange
+        }
+      });
+    }
+
+    // Gestion des événements du lecteur YouTube
+    function onPlayerStateChange(event) {
+      // Afficher le carrousel des sites amis lorsque la vidéo est terminée
+      if (event.data == YT.PlayerState.ENDED) {
+        showSitesAmisFullscreen();
+      } else if (event.data == YT.PlayerState.PLAYING) {
+        hideSitesAmisFullscreen();
+      }
+    }
+
+    // Afficher le carrousel des sites amis en plein écran
+    function showSitesAmisFullscreen() {
+      sitesAmisFullscreen.style.display = 'flex';
+    }
+
+    // Masquer le carrousel des sites amis
+    function hideSitesAmisFullscreen() {
+      sitesAmisFullscreen.style.display = 'none';
+    }
+
+    // Rejouer la vidéo
+    replayBtn.addEventListener('click', () => {
+      hideSitesAmisFullscreen();
+      if (player && typeof player.playVideo === 'function') {
+        player.playVideo();
+      }
+    });
+
+    function openSummary(videoUrl) {
+      // Masquer le carrousel des sites amis au démarrage
+      hideSitesAmisFullscreen();
+      
+      // Extraire l'ID de la vidéo depuis l'URL
+      let videoId = extractVideoId(videoUrl);
+      
+      if (!videoId) {
+        alert("URL YouTube non valide");
+        return;
+      }
+      
+      currentVideoId = videoId;
+      
+      // Charger la vidéo
+      if (player && typeof player.loadVideoById === 'function') {
+        player.loadVideoById(videoId);
+      } else {
+        // Solution de secours si l'API n'est pas encore chargée
+        document.getElementById('player').innerHTML = `
+          <iframe width="100%" height="100%" src="https://www.youtube.com/embed/${videoId}?autoplay=1" frameborder="0" allowfullscreen></iframe>
+        `;
+      }
+      
+      modal.show();
+    }
+
+    function extractVideoId(url) {
+      // Gérer différents formats d'URL YouTube
+      const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+      const match = url.match(regExp);
+      return (match && match[2].length === 11) ? match[2] : null;
+    }
+
+    function closeModal() {
+      modal.hide();
+      
+      // Arrêter la vidéo
+      try {
+        if (player && player.stopVideo) {
+          player.stopVideo();
+        }
+      } catch (e) {
+        console.log("Erreur lors de l'arrêt de la vidéo", e);
+      }
+    }
+
+    document.getElementById('summaryModal').addEventListener('hidden.bs.modal', () => {
+      // Arrêter la vidéo
+      try {
+        if (player && player.stopVideo) {
+          player.stopVideo();
+        }
+      } catch (e) {
+        console.log("Erreur lors de l'arrêt de la vidéo", e);
+      }
+      
+      // Masquer le carrousel des sites amis
+      hideSitesAmisFullscreen();
+    });
+
+    function filterByDate() {
+      const selectedDate = document.getElementById('filterDate').value;
+      document.querySelectorAll('#matchesContainer .card').forEach(card => {
+        card.style.display = selectedDate && card.getAttribute('data-date') !== selectedDate ? 'none' : 'block';
+      });
+    }
+  </script>
+</body>
 </html>
