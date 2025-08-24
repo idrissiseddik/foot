@@ -139,6 +139,18 @@
       border: 1px solid rgba(13, 110, 253, 0.2);
     }
     
+    .match-championship {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #fff;
+      background: linear-gradient(to right, #dc3545, #c82333);
+      padding: 5px 12px;
+      border-radius: 15px;
+      display: inline-block;
+      margin-bottom: 12px;
+      box-shadow: 0 3px 6px rgba(220, 53, 69, 0.2);
+    }
+    
     .btn-primary {
       background: linear-gradient(to right, var(--primary-color), #0a58ca);
       border: none;
@@ -274,14 +286,14 @@
       margin-bottom: 10px;
     }
     
-    .form-control {
+    .form-control, .form-select {
       border-radius: 30px;
       padding: 10px 20px;
       border: 2px solid #e9ecef;
       transition: all 0.3s ease;
     }
     
-    .form-control:focus {
+    .form-control:focus, .form-select:focus {
       border-color: var(--primary-color);
       box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
     }
@@ -293,6 +305,19 @@
       box-shadow: 0 5px 15px rgba(0,0,0,0.05);
       margin-bottom: 20px;
       border: 2px solid rgba(13, 110, 253, 0.1);
+    }
+    
+    .filter-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+    
+    .filter-group {
+      flex: 1;
+      min-width: 250px;
+      max-width: 350px;
     }
     
     /* Styles pour le carrousel des sites amis en plein écran */
@@ -472,6 +497,16 @@
         height: 45px;
         font-size: 1.3rem;
       }
+      
+      .filter-row {
+        flex-direction: column;
+        gap: 15px;
+      }
+      
+      .filter-group {
+        width: 100%;
+        max-width: 100%;
+      }
     }
   </style>
 </head>
@@ -485,104 +520,34 @@
     </div>
   </header>
 
-  <!-- Filtre par date -->
+  <!-- Filtres -->
   <div class="container my-4">
     <div class="filter-container">
-      <label for="filterDate" class="form-label">Filtrer par date :</label>
-      <input type="date" id="filterDate" class="form-control w-50 mx-auto" onchange="filterByDate()">
+      <div class="filter-row">
+        <div class="filter-group">
+          <label for="filterChampionship" class="form-label">Filtrer par championnat :</label>
+          <select id="filterChampionship" class="form-select" onchange="filterMatches()">
+            <option value="">Tous les championnats</option>
+            <option value="Ligue 1">Ligue 1</option>
+            <option value="Liga">Liga</option>
+            <option value="Premier League">Premier League</option>
+            <option value="Serie A">Serie A</option>
+            <option value="Bundesliga">Bundesliga</option>
+          </select>
+        </div>
+      </div>
     </div>
   </div>
 
-
-
   <!-- Cards -->
   <div class="container" id="matchesContainer">
-    <div class="card" data-date="2025-08-23">
+    <div class="card" data-date="2025-08-23" data-championship="Bundesliga">
       <div class="card-body">
-        <div class="match-teams">
-          <div class="team-container">
-            <div class="team-name">Genoa</div>
-            <div class="team-result">0</div>
-          </div>
-          <div class="vs-badge">VS</div>
-          <div class="team-container">
-            <div class="team-name">Lecce</div>
-            <div class="team-result">0</div>
-          </div>
-        </div>
-        <div class="match-date">23 Août 2025</div>
-        <button class="btn btn-primary" onclick="openSummary('https://youtu.be/sgKqKEtzv1o')">
-          <i class="fas fa-play-circle me-2"></i>Voir le résumé
-        </button>
-      </div>
-    </div>
-
-    <div class="card" data-date="2025-08-23">
-      <div class="card-body">
-        <div class="match-teams">
-          <div class="team-container">
-            <div class="team-name">Sassuolo</div>
-            <div class="team-result">0</div>
-          </div>
-          <div class="vs-badge">VS</div>
-          <div class="team-container">
-            <div class="team-name">Naples</div>
-            <div class="team-result">2</div>
-          </div>
-        </div>
-        <div class="match-date">23 Août 2025</div>
-        <button class="btn btn-primary" onclick="openSummary('https://youtu.be/wXNrPVMNK9Q')">
-          <i class="fas fa-play-circle me-2"></i>Voir le résumé
-        </button>
-      </div>
-    </div>
-
-    <div class="card" data-date="2025-08-23">
-      <div class="card-body">
-        <div class="match-teams">
-          <div class="team-container">
-            <div class="team-name">Rome</div>
-            <div class="team-result">1</div>
-          </div>
-          <div class="vs-badge">VS</div>
-          <div class="team-container">
-            <div class="team-name">Bologne</div>
-            <div class="team-result">0</div>
-          </div>
-        </div>
-        <div class="match-date">23 Août 2025</div>
-        <button class="btn btn-primary" onclick="openSummary('https://youtu.be/FqHGauGkacs')">
-          <i class="fas fa-play-circle me-2"></i>Voir le résumé
-        </button>
-      </div>
-    </div>
-
-    <div class="card" data-date="2025-08-23">
-      <div class="card-body">
-        <div class="match-teams">
-          <div class="team-container">
-            <div class="team-name">Milan</div>
-            <div class="team-result">1</div>
-          </div>
-          <div class="vs-badge">VS</div>
-          <div class="team-container">
-            <div class="team-name">Cermonese</div>
-            <div class="team-result">2</div>
-          </div>
-        </div>
-        <div class="match-date">23 Août 2025</div>
-        <button class="btn btn-primary" onclick="openSummary('https://youtu.be/m45tN2MWfyc')">
-          <i class="fas fa-play-circle me-2"></i>Voir le résumé
-        </button>
-      </div>
-    </div>
-
-    <div class="card" data-date="2025-08-23">
-      <div class="card-body">
+        <div class="match-championship">Bundesliga</div>
         <div class="match-teams">
           <div class="team-container">
             <div class="team-name">Francfort</div>
-            <div class="team-result">1</div>
+            <div class="team-result">4</div>
           </div>
           <div class="vs-badge">VS</div>
           <div class="team-container">
@@ -597,8 +562,10 @@
       </div>
     </div>
 
-    <div class="card" data-date="2025-08-23">
+
+    <div class="card" data-date="2025-08-23" data-championship="Bundesliga">
       <div class="card-body">
+        <div class="match-championship">Bundesliga</div>
         <div class="match-teams">
           <div class="team-container">
             <div class="team-name">Sankt Pauli</div>
@@ -617,8 +584,94 @@
       </div>
     </div>
 
-    <div class="card" data-date="2025-08-23">
+
+    <div class="card" data-date="2025-08-23" data-championship="Serie A">
       <div class="card-body">
+        <div class="match-championship">Serie A</div>
+        <div class="match-teams">
+          <div class="team-container">
+            <div class="team-name">Genoa</div>
+            <div class="team-result">0</div>
+          </div>
+          <div class="vs-badge">VS</div>
+          <div class="team-container">
+            <div class="team-name">Lecce</div>
+            <div class="team-result">0</div>
+          </div>
+        </div>
+        <div class="match-date">23 Août 2025</div>
+        <button class="btn btn-primary" onclick="openSummary('https://youtu.be/sgKqKEtzv1o')">
+          <i class="fas fa-play-circle me-2"></i>Voir le résumé
+        </button>
+      </div>
+    </div>
+
+    <div class="card" data-date="2025-08-23" data-championship="Serie A">
+      <div class="card-body">
+        <div class="match-championship">Serie A</div>
+        <div class="match-teams">
+          <div class="team-container">
+            <div class="team-name">Sassuolo</div>
+            <div class="team-result">0</div>
+          </div>
+          <div class="vs-badge">VS</div>
+          <div class="team-container">
+            <div class="team-name">Naples</div>
+            <div class="team-result">2</div>
+          </div>
+        </div>
+        <div class="match-date">23 Août 2025</div>
+        <button class="btn btn-primary" onclick="openSummary('https://youtu.be/wXNrPVMNK9Q')">
+          <i class="fas fa-play-circle me-2"></i>Voir le résumé
+        </button>
+      </div>
+    </div>
+
+    <div class="card" data-date="2025-08-23" data-championship="Serie A">
+      <div class="card-body">
+        <div class="match-championship">Serie A</div>
+        <div class="match-teams">
+          <div class="team-container">
+            <div class="team-name">Rome</div>
+            <div class="team-result">1</div>
+          </div>
+          <div class="vs-badge">VS</div>
+          <div class="team-container">
+            <div class="team-name">Bologne</div>
+            <div class="team-result">0</div>
+          </div>
+        </div>
+        <div class="match-date">23 Août 2025</div>
+        <button class="btn btn-primary" onclick="openSummary('https://youtu.be/FqHGauGkacs')">
+          <i class="fas fa-play-circle me-2"></i>Voir le résumé
+        </button>
+      </div>
+    </div>
+
+    <div class="card" data-date="2025-08-23" data-championship="Serie A">
+      <div class="card-body">
+        <div class="match-championship">Serie A</div>
+        <div class="match-teams">
+          <div class="team-container">
+            <div class="team-name">AC Milan</div>
+            <div class="team-result">1</div>
+          </div>
+          <div class="vs-badge">VS</div>
+          <div class="team-container">
+            <div class="team-name">Cremonese</div>
+            <div class="team-result">2</div>
+          </div>
+        </div>
+        <div class="match-date">23 Août 2025</div>
+        <button class="btn btn-primary" onclick="openSummary('https://youtu.be/m45tN2MWfyc')">
+          <i class="fas fa-play-circle me-2"></i>Voir le résumé
+        </button>
+      </div>
+    </div>
+
+    <div class="card" data-date="2025-08-23" data-championship="Premier League">
+      <div class="card-body">
+        <div class="match-championship">Premier League</div>
         <div class="match-teams">
           <div class="team-container">
             <div class="team-name">Man City</div>
@@ -637,8 +690,30 @@
       </div>
     </div>
 
-    <div class="card" data-date="2025-08-23">
+    <div class="card" data-date="2025-08-23" data-championship="Premier League">
       <div class="card-body">
+        <div class="match-championship">Premier League</div>
+        <div class="match-teams">
+          <div class="team-container">
+            <div class="team-name">Burnley</div>
+            <div class="team-result">2</div>
+          </div>
+          <div class="vs-badge">VS</div>
+          <div class="team-container">
+            <div class="team-name">Sunderland</div>
+            <div class="team-result">0</div>
+          </div>
+        </div>
+        <div class="match-date">23 Août 2025</div>
+        <button class="btn btn-primary" onclick="openSummary('https://youtu.be/x-2MgjezWYQ')">
+          <i class="fas fa-play-circle me-2"></i>Voir le résumé
+        </button>
+      </div>
+    </div>
+
+    <div class="card" data-date="2025-08-23" data-championship="Premier League">
+      <div class="card-body">
+        <div class="match-championship">Premier League</div>
         <div class="match-teams">
           <div class="team-container">
             <div class="team-name">Brentford</div>
@@ -657,8 +732,9 @@
       </div>
     </div>
 
-    <div class="card" data-date="2025-08-23">
+    <div class="card" data-date="2025-08-23" data-championship="Premier League">
       <div class="card-body">
+        <div class="match-championship">Premier League</div>
         <div class="match-teams">
           <div class="team-container">
             <div class="team-name">Bournemouth</div>
@@ -677,8 +753,9 @@
       </div>
     </div>
 
-    <div class="card" data-date="2025-08-23">
+    <div class="card" data-date="2025-08-23" data-championship="Premier League">
       <div class="card-body">
+        <div class="match-championship">Premier League</div>
         <div class="match-teams">
           <div class="team-container">
             <div class="team-name">Arsenal</div>
@@ -697,8 +774,9 @@
       </div>
     </div>
 
-    <div class="card" data-date="2025-08-23">
+    <div class="card" data-date="2025-08-23" data-championship="Liga">
       <div class="card-body">
+        <div class="match-championship">Liga</div>
         <div class="match-teams">
           <div class="team-container">
             <div class="team-name">Majorque</div>
@@ -717,11 +795,12 @@
       </div>
     </div>
 
-    <div class="card" data-date="2025-08-23">
+    <div class="card" data-date="2025-08-23" data-championship="Liga">
       <div class="card-body">
+        <div class="match-championship">Liga</div>
         <div class="match-teams">
           <div class="team-container">
-            <div class="team-name">AT.Madrid</div>
+            <div class="team-name">Atlético</div>
             <div class="team-result">1</div>
           </div>
           <div class="vs-badge">VS</div>
@@ -737,8 +816,9 @@
       </div>
     </div>
 
-    <div class="card" data-date="2025-08-23">
+    <div class="card" data-date="2025-08-23" data-championship="Liga">
       <div class="card-body">
+        <div class="match-championship">Liga</div>
         <div class="match-teams">
           <div class="team-container">
             <div class="team-name">Levante</div>
@@ -757,8 +837,9 @@
       </div>
     </div>
 
-    <div class="card" data-date="2025-08-22">
+    <div class="card" data-date="2025-08-22" data-championship="Liga">
       <div class="card-body">
+        <div class="match-championship">Liga</div>
         <div class="match-teams">
           <div class="team-container">
             <div class="team-name">Betis</div>
@@ -777,8 +858,9 @@
       </div>
     </div>
 
-    <div class="card" data-date="2025-08-22">
+    <div class="card" data-date="2025-08-22" data-championship="Premier League">
       <div class="card-body">
+        <div class="match-championship">Premier League</div>
         <div class="match-teams">
           <div class="team-container">
             <div class="team-name">West Ham</div>
@@ -796,12 +878,13 @@
         </button>
       </div>
     </div>
-
-    <div class="card" data-date="2025-08-22">
+    
+    <div class="card" data-date="2025-08-22" data-championship="Bundesliga">
       <div class="card-body">
+        <div class="match-championship">Bundesliga</div>
         <div class="match-teams">
           <div class="team-container">
-            <div class="team-name">B.Munich</div>
+            <div class="team-name">Bayern Munich</div>
             <div class="team-result">6</div>
           </div>
           <div class="vs-badge">VS</div>
@@ -815,12 +898,6 @@
           <i class="fas fa-play-circle me-2"></i>Voir le résumé
         </button>
       </div>
-    </div>
-
-
-
-
-
   </div>
 
   <!-- Modal -->
@@ -1046,10 +1123,16 @@
       hideSitesAmisFullscreen();
     });
 
-    function filterByDate() {
-      const selectedDate = document.getElementById('filterDate').value;
+    // Filtrer les matchs par championnat uniquement
+    function filterMatches() {
+      const selectedChampionship = document.getElementById('filterChampionship').value;
+      
       document.querySelectorAll('#matchesContainer .card').forEach(card => {
-        card.style.display = selectedDate && card.getAttribute('data-date') !== selectedDate ? 'none' : 'block';
+        const cardChampionship = card.getAttribute('data-championship');
+        
+        const championshipMatch = !selectedChampionship || cardChampionship === selectedChampionship;
+        
+        card.style.display = championshipMatch ? 'block' : 'none';
       });
     }
   </script>
