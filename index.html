@@ -595,32 +595,31 @@
       margin-top: 3px;
     }
     
-    /* Styles pour le bouton de réinitialisation séparé */
+    /* Styles pour le bouton de réinitialisation - MODIFIÉ */
     .filter-reset-notification {
-      position: fixed;
-      top: 100px;
-      left: 50%;
-      transform: translateX(-50%);
       background: white;
       border-radius: 15px;
       padding: 15px 20px;
       box-shadow: 0 5px 20px rgba(0,0,0,0.15);
-      z-index: 1000;
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 15px;
+      margin: 20px auto;
+      max-width: 90%;
+      border: 2px solid var(--primary-color);
       opacity: 0;
       visibility: hidden;
+      max-height: 0;
+      overflow: hidden;
       transition: all 0.4s ease;
-      border: 2px solid var(--primary-color);
-      max-width: 90%;
     }
     
     .filter-reset-notification.show {
       opacity: 1;
       visibility: visible;
-      top: 120px;
+      max-height: 200px;
+      margin: 20px auto;
     }
     
     .filter-reset-question {
@@ -767,19 +766,6 @@
       Aucun match trouvé
       <span class="filter-notification-details" id="filterNotificationDetails"></span>
     </p>
-  </div>
-
-  <!-- Notification de réinitialisation -->
-  <div class="filter-reset-notification" id="filterResetNotification">
-    <p class="filter-reset-question">Voulez-vous réinitialiser le filtre?</p>
-    <div class="filter-reset-buttons">
-      <button class="filter-reset-btn yes" onclick="confirmReset(true)">
-        <i class="fas fa-check"></i>
-      </button>
-      <button class="filter-reset-btn no" onclick="confirmReset(false)">
-        <i class="fas fa-times"></i>
-      </button>
-    </div>
   </div>
 
   <!-- Filtres -->
@@ -942,6 +928,19 @@
       </div>
     </div>
 
+  </div>
+
+  <!-- Notification de réinitialisation - DÉPLACÉE ICI -->
+  <div class="filter-reset-notification" id="filterResetNotification">
+    <p class="filter-reset-question">Voulez-vous réinitialiser le filtre?</p>
+    <div class="filter-reset-buttons">
+      <button class="filter-reset-btn yes" onclick="confirmReset(true)">
+        <i class="fas fa-check"></i>
+      </button>
+      <button class="filter-reset-btn no" onclick="confirmReset(false)">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
   </div>
 
   <!-- Fenêtre publicitaire -->
@@ -1166,7 +1165,7 @@
         notification.classList.add('show');
       }, 10);
       
-      // Masquer la notification après 3 secondes puis afficher la notification de réinitialisation
+      // Masquer la notification après 5 secondes puis afficher la notification de réinitialisation
       notificationTimer = setTimeout(() => {
         notification.classList.remove('show');
         
@@ -1176,7 +1175,7 @@
             resetNotification.classList.add('show');
           }, 400);
         }
-      }, 3000);
+      }, 5000);
     }
 
     // Fonction pour confirmer la réinitialisation
@@ -1254,7 +1253,7 @@
         // Formater la date pour la comparaison
         const dateStr = `${currentDate.getFullYear()}-${String(currentDate.getMonth() + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
         
-        // Vérifier si cette date a des matchs
+        // Vérifier si cette date has des matchs
         if (matchDates.includes(dateStr)) {
           dayElement.classList.add('has-match');
         }
